@@ -7,10 +7,10 @@ interface Note {
 }
 
 interface NoteComposerProps {
-  addnote: (note: Note) => void
+  addNote: (note: Note) => void
 }
 
-const NoteComposer = ({addnote}:NoteComposerProps) => {
+const NoteComposer = ({addNote}:NoteComposerProps) => {
 
   const [text, setText] = useState("")
 
@@ -27,6 +27,7 @@ const NoteComposer = ({addnote}:NoteComposerProps) => {
       </label>
       <textarea
         className="border border-gray-400 rounded-md p-2 bg-white/70"
+        maxLength={500}
         onChange={handletextChange}
         id="note-text"
         rows={3}
@@ -36,7 +37,7 @@ const NoteComposer = ({addnote}:NoteComposerProps) => {
       <p className="text-sm my-1">Color</p>
       <ColorPalette />
       <button className="note-btn mt-2" onClick={() => {
-        addnote({id:Date.now(), text: text})}}>Save Note</button>
+        addNote({id:Date.now(), text: text})}}>Save Note</button>
     </div>
   );
 };

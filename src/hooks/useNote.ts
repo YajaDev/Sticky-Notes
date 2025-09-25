@@ -23,12 +23,17 @@ const useNote = () => {
   }
 
   // Add Note Button
-  function addnote(note: Note) {
+  function addNote(note: Note) {
     setNotes((prev) => [...prev, note]);
     setIsAdding(false);
   }
 
-  return { handleAddBtn, isAdding, notes, addnote };
+  // Delete Note Button
+  function deleteNote(id:number) {
+    setNotes(prev => prev.filter(note => note.id !== id))
+  }
+
+  return { handleAddBtn, isAdding, notes, addNote, deleteNote };
 };
 
 export default useNote;

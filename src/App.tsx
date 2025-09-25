@@ -5,7 +5,7 @@ import useNote from "./hooks/useNote";
 
 function App() {
 
-  const {handleAddBtn, isAdding, notes ,addnote} = useNote()
+  const {handleAddBtn, isAdding, notes ,addNote, deleteNote} = useNote()
 
   return (
     <div className="p-5">
@@ -18,11 +18,11 @@ function App() {
             New Note
           </button>
         </div>
-        {isAdding && <NoteComposer addnote={addnote}/>}
+        {isAdding && <NoteComposer addNote={addNote}/>}
 
         {notes.map((note) => 
           <ul key={note.id} >
-            <NoteCard note={note}/>
+            <NoteCard note={note} deleteNote={deleteNote}/>
           </ul>
         )}
       </div>
