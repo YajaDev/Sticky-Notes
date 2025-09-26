@@ -14,6 +14,11 @@ const NoteComposer = ({
     setText(e.target.value);
   }
 
+  // handle keydown on textarea element
+  function handleKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
+    if (e.ctrlKey && e.key === "Enter") handleSaveBtn(text, theme);
+  }
+
   return (
     <div
       className={`flex flex-col p-5 ${theme.bg} ${theme.border} border-2 rounded-lg duration-200 transition-colors`}
@@ -25,13 +30,14 @@ const NoteComposer = ({
         className="border border-gray-400 rounded-md p-2 bg-white/70"
         maxLength={500}
         onChange={handletextChange}
+        onKeyDown={handleKeyDown}
         id="note-text"
         rows={3}
         placeholder="What's on your mind? (Ctrl+Enter to save)"
       />
       <p className="text-xs text-gray-500 pt-2">{text.length}/500 characters</p>
       <p className="text-sm my-1">Color</p>
-      <ColorPalette changeTheme={changeTheme} theme={theme}/>
+      <ColorPalette changeTheme={changeTheme} theme={theme} />
       <button
         className="note-btn mt-2"
         onClick={() => {

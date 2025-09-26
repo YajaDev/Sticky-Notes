@@ -38,7 +38,7 @@ const useNote = () => {
       colorTheme: theme,
       created: {
         date: dayjs().format("MM/DD/YYYY"),
-        time: dayjs().format("h:m A"),
+        time: dayjs().format("h:mm A"),
       },
     });
   }
