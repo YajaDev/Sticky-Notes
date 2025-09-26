@@ -1,1 +1,11 @@
 @import "tailwindcss";
+
+@theme {
+  --color-blue: #2563EB
+}
+
+@layer utilities {
+  .note-btn {
+    @apply p-2 bg-blue text-white rounded-md cursor-pointer
+  }
+}

@@ -1,19 +1,7 @@
 import { useState } from "react";
 import ColorPalette from "./ColorPalette";
 import dayjs from "dayjs";
-
-interface Note {
-  id: number;
-  text: string;
-  created: {
-    date:string
-    time: string
-  };
-}
-
-interface NoteComposerProps {
-  addNote: (note: Note) => void;
-}
+import type { NoteComposerProps } from "../types/note"
 
 const NoteComposer = ({ addNote }: NoteComposerProps) => {
   const [text, setText] = useState("");

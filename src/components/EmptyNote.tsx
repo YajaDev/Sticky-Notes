@@ -1,10 +1,7 @@
 import { Plus } from "lucide-react";
+import type { HandleAddBtnProp } from "../types/note"
 
-interface handleAddBtnProp {
-  handleAddBtn:() => void
-}
-
-const EmptyNote = ({handleAddBtn}:handleAddBtnProp) => {
+const EmptyNote = ({handleAddBtn}:HandleAddBtnProp) => {
   return (
     <div className="flex flex-col justify-center items-center gap-2 py-20">
       <Plus size={50} color="#6b7280"/>

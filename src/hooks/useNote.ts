@@ -1,13 +1,5 @@
 import { useState, useEffect } from "react";
-
-interface Note {
-  id: number;
-  text: string;
-  created: {
-    date:string
-    time: string
-  };
-}
+import type { Note } from "../types/note"
 
 const useNote = () => {
   const [isAdding, setIsAdding] = useState(false);

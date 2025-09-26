@@ -1,21 +1,7 @@
 import { Pin, PenLine, Trash2 } from "lucide-react";
-
-interface Note {
-  id: number;
-  text: string;
-  created: {
-    date:string
-    time: string
-  };
-}
-
-interface NoteCardProps {
-  note: Note;
-  deleteNote: (id: number) => void
-}
+import type { NoteCardProps } from "../types/note"
 
 const NoteCard = ({ note, deleteNote }: NoteCardProps) => {
-
   
   return (
     <div className="flex flex-col gap-2 w-full p-3 mb-3 rounded-sm border-2">
