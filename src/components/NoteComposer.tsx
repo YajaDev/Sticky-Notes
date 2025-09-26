@@ -1,17 +1,23 @@
 import { useState } from "react";
 import ColorPalette from "./ColorPalette";
-import dayjs from "dayjs";
-import type { NoteComposerProps } from "../types/note"
+import type { NoteComposerProps } from "../types/note";
 
-const NoteComposer = ({ addNote }: NoteComposerProps) => {
+const NoteComposer = ({
+  handleSaveBtn,
+  changeTheme,
+  theme,
+}: NoteComposerProps) => {
   const [text, setText] = useState("");
 
+  // handle text changes for textarea element
   function handletextChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
     setText(e.target.value);
   }
 
   return (
-    <div className="flex flex-col p-5 bg-yellow-200 border-2 border-yellow-300 rounded-lg">
+    <div
+      className={`flex flex-col p-5 ${theme.bg} ${theme.border} border-2 rounded-lg duration-200 transition-colors`}
+    >
       <label htmlFor="note-text" className="text-sm pb-1 ">
         New Note
       </label>
@@ -25,19 +31,11 @@ const NoteComposer = ({ addNote }: NoteComposerProps) => {
       />
       <p className="text-xs text-gray-500 pt-2">{text.length}/500 characters</p>
       <p className="text-sm my-1">Color</p>
-      <ColorPalette />
+      <ColorPalette changeTheme={changeTheme} theme={theme}/>
       <button
         className="note-btn mt-2"
         onClick={() => {
-          if (!text) return;
-          addNote({
-            id: Date.now(),
-            text: text,
-            created: {
-              date: dayjs().format("MM/DD/YYYY"),
-              time: dayjs().format("h:m A")
-            },
-          });
+          handleSaveBtn(text, theme);
         }}
       >
         Save Note

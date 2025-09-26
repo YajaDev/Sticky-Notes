@@ -4,8 +4,8 @@ import type { NoteCardProps } from "../types/note"
 const NoteCard = ({ note, deleteNote }: NoteCardProps) => {
   
   return (
-    <div className="flex flex-col gap-2 w-full p-3 mb-3 rounded-sm border-2">
-      <p className="text-lg">{note.text}</p>
+    <div className={`flex flex-col gap-2 w-full p-3 mb-3 rounded-sm border-2 ${note.colorTheme.border} ${note.colorTheme.bg}`}>
+      <p className="text-lg capitalize">{note.text}</p>
       <div className="text-xs text-gray-400">
         <p>{note.created.time}</p>
         <p>{note.created.date}</p>

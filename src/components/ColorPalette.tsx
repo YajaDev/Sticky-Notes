@@ -1,19 +1,25 @@
-const colorPalette = () => {
-  const colors: string[] = ["pink", "yellow", "purple", "green", "blue"];
+import type { ColorPaletteProps, NoteColor } from "../types/note";
 
-  return (
-    <>
-      <div className="flex gap-1">
-        {colors.map((color, i) => (
-          <button
-            className="h-6 w-6 rounded-full border-2 border-gray-300"
-            style={{ background: color }}
-            key={i}
-          />
-        ))}
-      </div> 
-    </>
+const ColorPalette = ({ changeTheme, theme }: ColorPaletteProps) => {
+  const colors: NoteColor[] = ["yellow", "pink", "blue", "green", "purple"];
+
+  return (  
+    <ul className="flex gap-1">
+      {colors.map((color, i) => (
+        <li
+          className={`h-6 w-6 rounded-full border-2 bg-${color}-200 cursor-pointer ${
+            theme.name === color
+              ? "outline-2 outline-gray-400 border-white/50"
+              : "border-gray-300"
+          }`}
+          onClick={() => {
+            changeTheme(color);
+          }}
+          key={i}
+        />
+      ))}
+    </ul>
   );
 };
 
-export default colorPalette;
+export default ColorPalette;
