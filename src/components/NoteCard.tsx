@@ -1,9 +1,12 @@
 import { Pin, PenLine, Trash2 } from "lucide-react";
-import dayjs from "dayjs";
 
 interface Note {
   id: number;
   text: string;
+  created: {
+    date:string
+    time: string
+  };
 }
 
 interface NoteCardProps {
@@ -12,12 +15,15 @@ interface NoteCardProps {
 }
 
 const NoteCard = ({ note, deleteNote }: NoteCardProps) => {
-  const date = dayjs().format("M/DD/YYYY");
 
+  
   return (
     <div className="flex flex-col gap-2 w-full p-3 mb-3 rounded-sm border-2">
-      <p>{note.text}</p>
-      <p className="text-sm text-gray-400">{date}</p>
+      <p className="text-lg">{note.text}</p>
+      <div className="text-xs text-gray-400">
+        <p>{note.created.time}</p>
+        <p>{note.created.date}</p>
+      </div>
       <div className="flex gap-2">
         <button>
           <Pin size={15} />

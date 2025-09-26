@@ -3,6 +3,10 @@ import { useState, useEffect } from "react";
 interface Note {
   id: number;
   text: string;
+  created: {
+    date:string
+    time: string
+  };
 }
 
 const useNote = () => {

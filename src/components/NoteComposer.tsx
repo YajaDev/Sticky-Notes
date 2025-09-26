@@ -1,18 +1,22 @@
 import { useState } from "react";
 import ColorPalette from "./ColorPalette";
+import dayjs from "dayjs";
 
 interface Note {
-  id: number
-  text: string
+  id: number;
+  text: string;
+  created: {
+    date:string
+    time: string
+  };
 }
 
 interface NoteComposerProps {
-  addNote: (note: Note) => void
+  addNote: (note: Note) => void;
 }
 
-const NoteComposer = ({addNote}:NoteComposerProps) => {
-
-  const [text, setText] = useState("")
+const NoteComposer = ({ addNote }: NoteComposerProps) => {
+  const [text, setText] = useState("");
 
   function handletextChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
     setText(e.target.value);
@@ -20,9 +24,7 @@ const NoteComposer = ({addNote}:NoteComposerProps) => {
 
   return (
     <div className="flex flex-col p-5 bg-yellow-200 border-2 border-yellow-300 rounded-lg">
-      <label 
-        htmlFor="note-text" 
-        className="text-sm pb-1 "> 
+      <label htmlFor="note-text" className="text-sm pb-1 ">
         New Note
       </label>
       <textarea
@@ -36,8 +38,22 @@ const NoteComposer = ({addNote}:NoteComposerProps) => {
       <p className="text-xs text-gray-500 pt-2">{text.length}/500 characters</p>
       <p className="text-sm my-1">Color</p>
       <ColorPalette />
-      <button className="note-btn mt-2" onClick={() => {
-        addNote({id:Date.now(), text: text})}}>Save Note</button>
+      <button
+        className="note-btn mt-2"
+        onClick={() => {
+          if (!text) return;
+          addNote({
+            id: Date.now(),
+            text: text,
+            created: {
+              date: dayjs().format("MM/DD/YYYY"),
+              time: dayjs().format("h:m A")
+            },
+          });
+        }}
+      >
+        Save Note
+      </button>
     </div>
   );
 };

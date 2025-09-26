@@ -2,13 +2,14 @@ import NoteComposer from "./components/NoteComposer";
 import NoteCard from "./components/NoteCard";
 import { Plus } from "lucide-react";
 import useNote from "./hooks/useNote";
+import EmptyNote from "./components/EmptyNote";
 
 function App() {
 
   const {handleAddBtn, isAdding, notes ,addNote, deleteNote} = useNote()
 
   return (
-    <div className="p-5">
+    <div className="min-h-screen p-5 ">
       <div className="flex flex-col">
         <h1 className="font-bold text-3xl">Sticky Notes</h1>
 
@@ -25,6 +26,9 @@ function App() {
             <NoteCard note={note} deleteNote={deleteNote}/>
           </ul>
         )}
+
+        {notes.length === 0 && <EmptyNote handleAddBtn={handleAddBtn} />}
+
       </div>
     </div>
   );
