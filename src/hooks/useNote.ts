@@ -12,7 +12,7 @@ const useNote = () => {
   );
 
   useEffect(() => {
-    localStorage.setItem("notes", JSON.stringify(notes));
+    localStorage.setItem("sticky-notes", JSON.stringify(notes));
   }, [notes]);
 
   // Add Button
@@ -54,6 +54,7 @@ const useNote = () => {
           id: Date.now() * Math.random(),
           text: newtext,
           colorTheme: newtheme,
+          isPinned: false,
           created: {
             date: dayjs().format("MM/DD/YYYY"),
             time: dayjs().format("h:mm A"),
@@ -76,6 +77,17 @@ const useNote = () => {
     setNotes((prev) => prev.filter((note) => note.id !== id));
   }
 
+  // Handle pin button
+  function toglePin(id: number) {
+    setNotes((prev) =>
+      prev
+        .map((note) =>
+          note.id === id ? { ...note, isPinned: !note.isPinned } : note
+        )
+        .sort((n1, n2) => (n2.isPinned ? 1 : 0) - (n1.isPinned ? 1 : 0))
+    );
+  }
+
   return {
     handleAddBtn,
     isAdding,
@@ -85,6 +97,7 @@ const useNote = () => {
     deleteNote,
     editNote,
     cancelEdit,
+    toglePin,
   };
 };
 

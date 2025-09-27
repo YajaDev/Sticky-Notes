@@ -14,6 +14,7 @@ function App() {
     deleteNote,
     editNote,
     cancelEdit,
+    toglePin
   } = useNote();
 
   return (
@@ -50,6 +51,7 @@ function App() {
                 note={note}
                 deleteNote={deleteNote}
                 editNote={editNote}
+                toglePin={toglePin}
               />
             </ul>
           )

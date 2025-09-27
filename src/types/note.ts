@@ -2,6 +2,7 @@ export interface Note {
   id: number;
   text: string;
   colorTheme: NoteColorTheme;
+  isPinned: boolean;
   created: {
     date: string;
     time: string;
@@ -17,6 +18,7 @@ export interface NoteCardProps {
   note: Note;
   deleteNote: (id: number) => void;
   editNote: (id: number) => void;
+  toglePin: (id: number) => void;
 }
 
 export interface NoteComposerProps {
