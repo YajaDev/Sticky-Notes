@@ -9,6 +9,7 @@ const Colors: NoteColorTheme[] = [
   { name: "purple", bg: "bg-purple-200", border: "border-purple-300" },
 ];
 
+// Utils that search a theme (NoteColorTheme)
 const findtheme = (color: NoteColor) => {
   return Colors.find((c) => c.name === color) || Colors[0];
 };
@@ -16,6 +17,7 @@ const findtheme = (color: NoteColor) => {
 const useColor = (color: NoteColor) => {
   const [theme, setTheme] = useState<NoteColorTheme>(() => findtheme(color));
 
+  // Change the theme
   function changeTheme(color: NoteColor) {
     const newTheme: NoteColorTheme = findtheme(color);
     setTheme(newTheme);

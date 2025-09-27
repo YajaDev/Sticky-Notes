@@ -3,12 +3,18 @@ import NoteCard from "./components/NoteCard";
 import { Plus } from "lucide-react";
 import useNote from "./hooks/useNote";
 import EmptyNote from "./components/EmptyNote";
-import useColor from "./hooks/useColor";
 
 function App() {
-  const { theme, changeTheme } = useColor("yellow");
-  const { handleAddBtn, isAdding, notes, handleSaveBtn, deleteNote } =
-    useNote();
+  const {
+    handleAddBtn,
+    isAdding,
+    EditingId,
+    notes,
+    handleSaveBtn,
+    deleteNote,
+    editNote,
+    cancelEdit,
+  } = useNote();
 
   return (
     <div className="min-h-screen p-5 ">
@@ -24,20 +30,32 @@ function App() {
             New Note
           </button>
         </div>
-        {isAdding && (
-          <NoteComposer
-            handleSaveBtn={handleSaveBtn}
-            changeTheme={changeTheme}
-            theme={theme}
-          />
+
+        {/* Render when add note is clicked */}
+        {isAdding && <NoteComposer handleSaveBtn={handleSaveBtn} />}
+
+        {/* Conditional Render */}
+        {notes.map((note) =>
+          note.id === EditingId ? (
+            // Render NoteComposer if status is "editing"
+            <NoteComposer
+              key={note.id}
+              handleSaveBtn={handleSaveBtn}
+              editMode={{ note, cancelEdit }}
+            />
+          ) : (
+            // Render Note
+            <ul key={note.id}>
+              <NoteCard
+                note={note}
+                deleteNote={deleteNote}
+                editNote={editNote}
+              />
+            </ul>
+          )
         )}
 
-        {notes.map((note) => (
-          <ul key={note.id}>
-            <NoteCard note={note} deleteNote={deleteNote} />
-          </ul>
-        ))}
-
+        {/* Render if notes is empty */}
         {notes.length === 0 && <EmptyNote handleAddBtn={handleAddBtn} />}
       </div>
     </div>

@@ -3,7 +3,8 @@ import dayjs from "dayjs";
 import type { Note, NoteColorTheme } from "../types/note";
 
 const useNote = () => {
-  const [isAdding, setIsAdding] = useState(false);
+  const [isAdding, setIsAdding] = useState<boolean>(false);
+  const [EditingId, setEditingId] = useState<number | null>(null);
 
   // notes
   const [notes, setNotes] = useState<Note[]>(() =>
@@ -17,6 +18,7 @@ const useNote = () => {
   // Add Button
   function handleAddBtn() {
     setIsAdding(!isAdding);
+    setEditingId(null);
   }
 
   // Add Note Button
@@ -25,22 +27,48 @@ const useNote = () => {
     setIsAdding(false);
   }
 
-  function handleSaveBtn(text: string, theme: NoteColorTheme) {
-    if (!text.trim()) {
+  function handleSaveBtn(
+    newtext: string,
+    newtheme: NoteColorTheme,
+    id?: number
+  ) {
+    if (!newtext.trim()) {
       setIsAdding(false);
+      setEditingId(null);
       alert("Note cannot be empty.");
       return;
     }
 
-    addNote({
-      id: Date.now(),
-      text: text,
-      colorTheme: theme,
-      created: {
-        date: dayjs().format("MM/DD/YYYY"),
-        time: dayjs().format("h:mm A"),
-      },
-    });
+    id
+      ? // do if props has id
+        setNotes((notes) => {
+          setEditingId(null);
+          return notes.map((note) =>
+            note.id === id
+              ? { ...note, colorTheme: newtheme, text: newtext }
+              : note
+          );
+        })
+      : // do if props has id
+        addNote({
+          id: Date.now() * Math.random(),
+          text: newtext,
+          colorTheme: newtheme,
+          created: {
+            date: dayjs().format("MM/DD/YYYY"),
+            time: dayjs().format("h:mm A"),
+          },
+        });
+  }
+
+  // Edit Note Utilities
+  function editNote(id: number) {
+    setEditingId(id);
+    setIsAdding(false); // Close NoteComposer component
+  }
+
+  function cancelEdit() {
+    setEditingId(null);
   }
 
   // Delete Note Button
@@ -48,7 +76,16 @@ const useNote = () => {
     setNotes((prev) => prev.filter((note) => note.id !== id));
   }
 
-  return { handleAddBtn, isAdding, notes, handleSaveBtn, deleteNote };
+  return {
+    handleAddBtn,
+    isAdding,
+    EditingId,
+    notes,
+    handleSaveBtn,
+    deleteNote,
+    editNote,
+    cancelEdit,
+  };
 };
 
 export default useNote;

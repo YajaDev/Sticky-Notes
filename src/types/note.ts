@@ -16,12 +16,17 @@ export interface ColorPaletteProps {
 export interface NoteCardProps {
   note: Note;
   deleteNote: (id: number) => void;
+  editNote: (id: number) => void;
 }
 
 export interface NoteComposerProps {
-  handleSaveBtn: (text: string, theme: NoteColorTheme) => void;
-  changeTheme: (color: NoteColor) => void;
-  theme: NoteColorTheme;
+  handleSaveBtn: (text: string, theme: NoteColorTheme, id?: number) => void;
+  editMode?: editMode;
+}
+
+interface editMode {
+  cancelEdit: () => void;
+  note: Note;
 }
 
 export interface HandleAddBtnProp {

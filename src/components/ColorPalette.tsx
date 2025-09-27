@@ -1,7 +1,9 @@
 import type { ColorPaletteProps, NoteColor } from "../types/note";
 
+// Move outside component to prevent re-render
+const colors: NoteColor[] = ["yellow", "pink", "blue", "green", "purple"];
+
 const ColorPalette = ({ changeTheme, theme }: ColorPaletteProps) => {
-  const colors: NoteColor[] = ["yellow", "pink", "blue", "green", "purple"];
 
   return (  
     <ul className="flex gap-1">
