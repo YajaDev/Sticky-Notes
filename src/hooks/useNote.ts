@@ -8,7 +8,7 @@ const useNote = () => {
 
   // notes
   const [notes, setNotes] = useState<Note[]>(() =>
-    JSON.parse(localStorage.getItem("notes") || "[]")
+    JSON.parse(localStorage.getItem("sticky-notes") || "[]")
   );
 
   useEffect(() => {
