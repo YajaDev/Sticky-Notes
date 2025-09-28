@@ -36,9 +36,10 @@ export interface HandleAddBtnProp {
 }
 
 // Color System types
-export type NoteColor = "yellow" | "pink" | "blue" | "green" | "purple";
+export type NoteColor = "yellow" | "pink" | "blue" | "green" | "purple" | "null";
 
 type NoteBackgroundColor =
+  | "null"
   | "bg-yellow-200"
   | "bg-pink-200"
   | "bg-blue-200"
@@ -46,6 +47,7 @@ type NoteBackgroundColor =
   | "bg-purple-200";
 
 type NoteBorderColor =
+  | "null"
   | "border-yellow-300"
   | "border-pink-300"
   | "border-blue-300"

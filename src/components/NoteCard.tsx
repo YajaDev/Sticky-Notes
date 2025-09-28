@@ -1,4 +1,4 @@
-import { Pin, Star, PinOff, PenLine, Trash2 } from "lucide-react";
+import { Pin, PinOff, PenLine, Trash2 } from "lucide-react";
 import type { NoteCardProps } from "../types/note";
 
 const NoteCard = ({ note, deleteNote, editNote, toglePin }: NoteCardProps) => {
@@ -8,11 +8,11 @@ const NoteCard = ({ note, deleteNote, editNote, toglePin }: NoteCardProps) => {
     >
       {/* Render if note is pinned */}
       {note.isPinned && (
-        <Star
-          className="absolute -top-2 -right-2"
-          size={18}
-          fill="#ca8a04"
-          strokeWidth={0}
+        <Pin
+          className="absolute -top-2 -right-2 rotate-50"
+          size={17}
+          fill="red"
+          strokeWidth={1}
         />
       )}
 

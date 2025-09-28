@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { NoteColor, NoteColorTheme } from "../types/note";
 
 const Colors: NoteColorTheme[] = [
+  { name: "null", bg: "null", border: "null" },
   { name: "yellow", bg: "bg-yellow-200", border: "border-yellow-300" },
   { name: "pink", bg: "bg-pink-200", border: "border-pink-300" },
   { name: "blue", bg: "bg-blue-200", border: "border-blue-300" },
@@ -19,8 +20,7 @@ const useColor = (color: NoteColor) => {
 
   // Change the theme
   function changeTheme(color: NoteColor) {
-    const newTheme: NoteColorTheme = findtheme(color);
-    setTheme(newTheme);
+    setTheme(findtheme(color));
   }
 
   return { theme, changeTheme };

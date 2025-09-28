@@ -3,6 +3,7 @@ import NoteCard from "./components/NoteCard";
 import { Plus } from "lucide-react";
 import useNote from "./hooks/useNote";
 import EmptyNote from "./components/EmptyNote";
+import SearchBar from './components/SearchBar'
 
 function App() {
   const {
@@ -34,6 +35,8 @@ function App() {
 
         {/* Render when add note is clicked */}
         {isAdding && <NoteComposer handleSaveBtn={handleSaveBtn} />}
+
+        <SearchBar />
 
         {/* Conditional Render */}
         {notes.map((note) =>
