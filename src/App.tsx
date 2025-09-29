@@ -67,6 +67,7 @@ function App() {
         {/* Render if notes is empty */}
         {notes.length === 0 && <EmptyNote handleAddBtn={handleAddBtn} />}
 
+        {/* Render if No notes found after filtering notes*/}
         {(notes.length > 0 && notesToShow.length === 0) && <NoNotesFound />}
       </div>
     </div>
