@@ -5,6 +5,7 @@ import useNote from "./hooks/useNote";
 import EmptyNote from "./components/EmptyNote";
 import SearchBar from './components/SearchBar'
 import useFilteredNote from "./hooks/useFilteredNote";
+import NoNotesFound from "./components/NoNotesFound";
 
 function App() {
   const {
@@ -65,6 +66,8 @@ function App() {
 
         {/* Render if notes is empty */}
         {notes.length === 0 && <EmptyNote handleAddBtn={handleAddBtn} />}
+
+        {(notes.length > 0 && notesToShow.length === 0) && <NoNotesFound />}
       </div>
     </div>
   );
