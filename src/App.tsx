@@ -23,8 +23,8 @@ function App() {
   const {notesToShow, notefilter} = useFilteredNote(notes)
   
   return (
-    <div className="min-h-screen p-5 ">
-      <div className="flex flex-col">
+    <div className="min-h-screen p-5 flex flex-col">
+      <main className="flex-1">
         <h1 className="font-bold text-3xl">Sticky Notes</h1>
 
         <div className="flex justify-end">
@@ -69,7 +69,14 @@ function App() {
 
         {/* Render if No notes found after filtering notes*/}
         {(notes.length > 0 && notesToShow.length === 0) && <NoNotesFound />}
-      </div>
+      </main>
+
+      <footer className="text-center text-sm text-black/70 mt-5 pt-8 pb-5 border-t-2 border-gray-200">
+        <p>
+          {notes.length > 0 && `${notes.length} note${notes.length !== 1 ? 's' : ''} total`}
+          {notesToShow.length < notes.length && ` • ${notesToShow.length} shown`}
+        </p>
+      </footer>
     </div>
   );
 }
