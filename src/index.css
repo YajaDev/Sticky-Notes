@@ -1,11 +1,17 @@
 @import "tailwindcss";
 
 @theme {
-  --color-blue: #2563EB
+  --color-blue: #2563eb;
+}
+
+@layer base {
+  button {
+    @apply cursor-pointer transition-all duration-200 hover:shadow-lg ;
+  }
 }
 
 @layer utilities {
   .note-btn {
-    @apply p-2 bg-blue text-white rounded-md cursor-pointer
+    @apply p-2 bg-blue text-white rounded-md md:px-4 lg:text-lg hover:bg-blue-700 ;
   }
 }

@@ -22,7 +22,7 @@ export interface NoteCardProps {
   note: Note;
   deleteNote: (id: number) => void;
   editNote: (id: number) => void;
-  toglePin: (id: number) => void;
+  togglePin: (id: number) => void;
 }
 
 export interface NoteComposerProps {

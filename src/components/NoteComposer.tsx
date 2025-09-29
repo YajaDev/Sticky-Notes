@@ -22,7 +22,8 @@ const NoteComposer = ({ handleSaveBtn, editMode }: NoteComposerProps) => {
         maxLength={500}
         onChange={(e) => setText(e.target.value)}
         onKeyDown={(e) => {
-          if (e.ctrlKey && e.key === "Enter") handleSaveBtn(text, theme, editMode?.note.id);
+          if (e.ctrlKey && e.key === "Enter")
+            handleSaveBtn(text, theme, editMode?.note.id);
         }}
         value={text}
         id="note-text"

@@ -78,13 +78,13 @@ const useNote = () => {
   }
 
   // Handle pin button
-  function toglePin(id: number) {
+  function togglePin(id: number) {
     setNotes((prev) =>
       prev
         .map((note) =>
           note.id === id ? { ...note, isPinned: !note.isPinned } : note
         )
-        .sort((n1, n2) => (n2.isPinned ? 1 : 0) - (n1.isPinned ? 1 : 0))
+        .sort((n1, n2) => (n2.isPinned ? 1 : -1) - (n1.isPinned ? 1 : -1))
     );
   }
 
@@ -97,7 +97,7 @@ const useNote = () => {
     deleteNote,
     editNote,
     cancelEdit,
-    toglePin,
+    togglePin,
   };
 };
 
