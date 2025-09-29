@@ -1,8 +1,11 @@
 import { Search } from "lucide-react";
 import useColor from "../hooks/useColor";
 import ColorPalette from "./ColorPalette";
+import type { SearchBarPros } from "../types/note";
+import { useState } from "react";
 
-const SearchBar = () => {
+const SearchBar = ({ notefilter }: SearchBarPros) => {
+  const [text, setText] = useState("");
   const { theme, changeTheme } = useColor("null");
 
   return (
@@ -11,6 +14,10 @@ const SearchBar = () => {
         type="text"
         id="searchText"
         placeholder="Search notes..."
+        onChange={(e) => {
+          setText(e.target.value);
+          notefilter(e.target.value, theme.name);
+        }}
         className="w-full py-2 px-10 border-1 border-black/40 rounded-sm"
       />
 
@@ -32,12 +39,15 @@ const SearchBar = () => {
               : "border-black/30"
           }`}
           disabled={theme.name === "null"}
-          onClick={() => changeTheme("null")}
+          onClick={() => {
+            changeTheme("null")
+            notefilter(text, "null" )
+          }}
         >
           All
         </button>
 
-        <ColorPalette changeTheme={changeTheme} theme={theme} />
+        <ColorPalette changeTheme={changeTheme} theme={theme} filterMode={{text, notefilter}}/>
       </div>
     </div>
   );

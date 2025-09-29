@@ -12,6 +12,10 @@ export interface Note {
 export interface ColorPaletteProps {
   changeTheme: (c: NoteColor) => void;
   theme: NoteColorTheme;
+  filterMode?: {
+    text: string;
+    notefilter: (text: string, color: NoteColor) => void;
+  };
 }
 
 export interface NoteCardProps {
@@ -23,20 +27,28 @@ export interface NoteCardProps {
 
 export interface NoteComposerProps {
   handleSaveBtn: (text: string, theme: NoteColorTheme, id?: number) => void;
-  editMode?: editMode;
-}
-
-interface editMode {
-  cancelEdit: () => void;
-  note: Note;
+  editMode?: {
+    cancelEdit: () => void;
+    note: Note;
+  };
 }
 
 export interface HandleAddBtnProp {
   handleAddBtn: () => void;
 }
 
+export interface SearchBarPros {
+  notefilter: (text: string, color: NoteColor) => void;
+}
+
 // Color System types
-export type NoteColor = "yellow" | "pink" | "blue" | "green" | "purple" | "null";
+export type NoteColor =
+  | "yellow"
+  | "pink"
+  | "blue"
+  | "green"
+  | "purple"
+  | "null";
 
 type NoteBackgroundColor =
   | "null"

@@ -3,13 +3,16 @@ import type { ColorPaletteProps, NoteColor } from "../types/note";
 // Moved outside component to prevent re-render
 const colors: NoteColor[] = ["yellow", "pink", "blue", "green", "purple"];
 
-const ColorPalette = ({ changeTheme, theme }: ColorPaletteProps) => {
+const ColorPalette = ({ changeTheme, theme, filterMode }: ColorPaletteProps) => {
   return (
     <ul className="flex gap-1">
       {colors.map((color, i) => (
         <button
           disabled={theme.name === color} // disable to avoid re-render(Prevent re-selecting the current color)
-          onClick={() => changeTheme(color)}
+          onClick={() => {
+            changeTheme(color) 
+            filterMode && filterMode.notefilter(filterMode.text, color)
+          }}
           key={i}
           className={`h-6 w-6 rounded-full border-2 bg-${color}-200 cursor-pointer ${
             theme.name === color

@@ -4,6 +4,7 @@ import { Plus } from "lucide-react";
 import useNote from "./hooks/useNote";
 import EmptyNote from "./components/EmptyNote";
 import SearchBar from './components/SearchBar'
+import useFilteredNote from "./hooks/useFilteredNote";
 
 function App() {
   const {
@@ -18,6 +19,8 @@ function App() {
     toglePin
   } = useNote();
 
+  const {notesToShow, notefilter} = useFilteredNote(notes)
+  
   return (
     <div className="min-h-screen p-5 ">
       <div className="flex flex-col">
@@ -36,10 +39,10 @@ function App() {
         {/* Render when add note is clicked */}
         {isAdding && <NoteComposer handleSaveBtn={handleSaveBtn} />}
 
-        <SearchBar />
+        <SearchBar notefilter={notefilter}/>
 
         {/* Conditional Render */}
-        {notes.map((note) =>
+        {notesToShow.map((note) =>
           note.id === EditingId ? (
             // Render NoteComposer if status is "editing"
             <NoteComposer
