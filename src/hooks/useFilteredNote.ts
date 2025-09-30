@@ -7,28 +7,26 @@ const useFilteredNote = (notes: Note[]) => {
   const [filterColor, setfilterColor] = useState<NoteColor>("null");
 
   useEffect(() => {
-    notefilter(serchText, filterColor);
-  }, [notes]);
-
-  function notefilter(text: string, color: NoteColor) {
     let filteredNotes: Note[] = notes;
 
-    setserchText(text);
-    setfilterColor(color);
-
-    if (text.trim()) {
+    if (serchText.trim()) {
       filteredNotes = filteredNotes.filter((note) =>
-        note.text.toLowerCase().includes(text.trim().toLowerCase())
+        note.text.toLowerCase().includes(serchText.trim().toLowerCase())
       );
     }
 
-    if (color !== "null") {
+    if (filterColor !== "null") {
       filteredNotes = filteredNotes.filter(
-        (note) => note.colorTheme.name === color
+        (note) => note.colorTheme.name === filterColor
       );
     }
 
     setNotesToShow(filteredNotes);
+  }, [notes, filterColor, serchText]);
+
+  function notefilter(text: string, color: NoteColor) {
+    setserchText(text);
+    setfilterColor(color);
   }
 
   return { notesToShow, notefilter };
