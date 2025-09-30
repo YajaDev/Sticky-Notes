@@ -39,27 +39,29 @@ const useNote = () => {
       return;
     }
 
-    id
-      ? // do if props has id
-        setNotes((notes) => {
-          setEditingId(null);
-          return notes.map((note) =>
-            note.id === id
-              ? { ...note, colorTheme: newtheme, text: newtext }
-              : note
-          );
-        })
-      : // do if props has id
-        addNote({
-          id: Date.now() * Math.random(),
-          text: newtext,
-          colorTheme: newtheme,
-          isPinned: false,
-          created: {
-            date: dayjs().format("MM/DD/YYYY"),
-            time: dayjs().format("h:mm A"),
-          },
-        });
+    if (id) {
+      // do if props has id
+      setNotes((notes) => {
+        setEditingId(null);
+        return notes.map((note) =>
+          note.id === id
+            ? { ...note, colorTheme: newtheme, text: newtext }
+            : note
+        );
+      });
+    } else {
+      // do if props has id
+      addNote({
+        id: Date.now() * Math.random(),
+        text: newtext,
+        colorTheme: newtheme,
+        isPinned: false,
+        created: {
+          date: dayjs().format("MM/DD/YYYY"),
+          time: dayjs().format("h:mm A"),
+        },
+      });
+    }
   }
 
   // Edit Note Utilities

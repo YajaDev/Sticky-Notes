@@ -12,10 +12,11 @@ const ColorPalette = ({
     <ul className="flex gap-1 md:gap-2">
       {colors.map((color, i) => (
         <button
+          aria-label={`Filter by ${color} color`}
           disabled={theme.name === color} // disable to avoid re-render(Prevent re-selecting the current color)
           onClick={() => {
             changeTheme(color);
-            filterMode && filterMode.notefilter(filterMode.text, color);
+            if (filterMode) filterMode.notefilter(filterMode.text, color);
           }}
           key={i}
           className={`h-6 w-6 rounded-full border-2 bg-${color}-200 cursor-pointer hover:scale-110 ${
