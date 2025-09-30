@@ -42,7 +42,7 @@ function App() {
 
         <SearchBar notefilter={notefilter} />
 
-        <ul className="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-4">
+        <ul className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-3 lg:gap-4">
           {/* Conditional Render */}
           {notesToShow.map((note) =>
             note.id === EditingId ? (
