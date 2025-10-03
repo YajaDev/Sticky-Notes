@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import dayjs from "dayjs";
 import type { Note, NoteColorTheme } from "../types/note";
+import { htmlToText } from "../utils/text";
 
 const useNote = () => {
   const [isAdding, setIsAdding] = useState<boolean>(false);
@@ -32,7 +33,7 @@ const useNote = () => {
     newtheme: NoteColorTheme,
     id?: number
   ) {
-    if (!newtext.trim()) {
+    if (!htmlToText(newtext).trim()) {
       setIsAdding(false);
       setEditingId(null);
       alert("Note cannot be empty.");

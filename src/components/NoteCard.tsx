@@ -15,7 +15,10 @@ const NoteCard = ({ note, deleteNote, editNote, togglePin }: NoteCardProps) => {
         />
       )}
 
-      <p className="text-lg capitalize">{note.text}</p>
+      <p
+        className="note-text text-lg capitalize"
+        dangerouslySetInnerHTML={{ __html: note.text }}
+      />
       <div className="text-xs text-gray-400">
         <p>{note.created.time}</p>
         <p>{note.created.date}</p>

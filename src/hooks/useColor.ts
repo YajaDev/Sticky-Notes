@@ -2,12 +2,37 @@ import { useState } from "react";
 import type { NoteColor, NoteColorTheme } from "../types/note";
 
 const Colors: NoteColorTheme[] = [
-  { name: "null", bg: "null", border: "null" },
-  { name: "yellow", bg: "bg-yellow-200", border: "border-yellow-300" },
-  { name: "pink", bg: "bg-pink-200", border: "border-pink-300" },
-  { name: "blue", bg: "bg-blue-200", border: "border-blue-300" },
-  { name: "green", bg: "bg-green-200", border: "border-green-300" },
-  { name: "purple", bg: "bg-purple-200", border: "border-purple-300" },
+  { name: "null", text: "null", bg: "null", border: "null" },
+  {
+    name: "yellow",
+    text: "text-yellow-200",
+    bg: "bg-yellow-200",
+    border: "border-yellow-300",
+  },
+  {
+    name: "pink",
+    text: "text-pink-200",
+    bg: "bg-pink-200",
+    border: "border-pink-300",
+  },
+  {
+    name: "blue",
+    text: "text-blue-200",
+    bg: "bg-blue-200",
+    border: "border-blue-300",
+  },
+  {
+    name: "green",
+    text: "text-green-200",
+    bg: "bg-green-200",
+    border: "border-green-300",
+  },
+  {
+    name: "purple",
+    text: "text-purple-200",
+    bg: "bg-purple-200",
+    border: "border-purple-300",
+  },
 ];
 
 // Utils that search a theme (NoteColorTheme)

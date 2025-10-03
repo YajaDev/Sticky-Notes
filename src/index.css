@@ -1,17 +1,35 @@
 @import "tailwindcss";
 
+.ProseMirror p.is-editor-empty:first-child::before {
+  @apply absolute;
+  content: attr(data-placeholder);
+  color: #9ca3af; /* Tailwind gray-400 */
+  pointer-events: none;
+  height: 100%;
+}
+
+.ProseMirror {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.ProseMirror ul,
+.note-text ul {
+  @apply list-disc relative left-4.5;
+}
+
 @theme {
   --color-blue: #2563eb;
 }
 
 @layer base {
   button {
-    @apply cursor-pointer transition-all duration-200 hover:shadow-lg ;
+    @apply cursor-pointer transition-all duration-200 hover:shadow-lg;
   }
 }
 
 @layer utilities {
   .note-btn {
-    @apply p-2 bg-blue text-white rounded-md md:px-4 lg:text-lg hover:bg-blue-700 ;
+    @apply p-2 bg-blue text-white rounded-md md:px-4 lg:text-lg hover:bg-blue-700;
   }
 }

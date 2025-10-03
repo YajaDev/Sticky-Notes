@@ -58,6 +58,14 @@ type NoteBackgroundColor =
   | "bg-green-200"
   | "bg-purple-200";
 
+type NoteTextColor =
+  | "null"
+  | "text-yellow-200"
+  | "text-pink-200"
+  | "text-blue-200"
+  | "text-green-200"
+  | "text-purple-200";
+
 type NoteBorderColor =
   | "null"
   | "border-yellow-300"
@@ -68,6 +76,7 @@ type NoteBorderColor =
 
 export interface NoteColorTheme {
   name: NoteColor;
+  text: NoteTextColor;
   bg: NoteBackgroundColor;
   border: NoteBorderColor;
 }

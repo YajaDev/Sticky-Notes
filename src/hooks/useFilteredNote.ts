@@ -1,28 +1,25 @@
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 import type { Note, NoteColor } from "../types/note";
+import { htmlToText } from "../utils/text";
 
 const useFilteredNote = (notes: Note[]) => {
-  const [notesToShow, setNotesToShow] = useState<Note[]>([]);
-  const [serchText, setserchText] = useState<string>("");
+  const [searchText, setserchText] = useState<string>("");
   const [filterColor, setfilterColor] = useState<NoteColor>("null");
 
-  useEffect(() => {
-    let filteredNotes: Note[] = notes;
+  const notesToShow = useMemo(() => {
+    return notes.filter((note) => {
+      const plainText = htmlToText(note.text).toLowerCase();
 
-    if (serchText.trim()) {
-      filteredNotes = filteredNotes.filter((note) =>
-        note.text.toLowerCase().includes(serchText.trim().toLowerCase())
-      );
-    }
+      const matchesText = searchText.trim()
+        ? plainText.includes(searchText.trim().toLowerCase())
+        : true;
 
-    if (filterColor !== "null") {
-      filteredNotes = filteredNotes.filter(
-        (note) => note.colorTheme.name === filterColor
-      );
-    }
+      const matchesColor =
+        filterColor !== "null" ? note.colorTheme.name === filterColor : true;
 
-    setNotesToShow(filteredNotes);
-  }, [notes, filterColor, serchText]);
+      return matchesColor && matchesText;
+    });
+  }, [notes, searchText, filterColor]);
 
   function notefilter(text: string, color: NoteColor) {
     setserchText(text);
