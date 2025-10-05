@@ -1,13 +1,14 @@
 @import "tailwindcss";
 
+/* placeholder of text editor */
 .ProseMirror p.is-editor-empty:first-child::before {
-  @apply absolute;
   content: attr(data-placeholder);
   color: #9ca3af; /* Tailwind gray-400 */
   pointer-events: none;
   height: 100%;
 }
 
+/* remove outline and shadow on text editor */
 .ProseMirror {
   outline: none !important;
   box-shadow: none !important;

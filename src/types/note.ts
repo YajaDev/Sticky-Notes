@@ -1,3 +1,11 @@
+type HandleSaveBtn = (text: string, theme: NoteColorTheme, id?: number) => void;
+type VoidFunction = () => void;
+
+interface EditMode {
+  cancelEdit: VoidFunction;
+  note: Note;
+};
+
 export interface Note {
   id: number;
   text: string;
@@ -26,19 +34,24 @@ export interface NoteCardProps {
 }
 
 export interface NoteComposerProps {
-  handleSaveBtn: (text: string, theme: NoteColorTheme, id?: number) => void;
-  editMode?: {
-    cancelEdit: () => void;
-    note: Note;
-  };
+  handleSaveBtn: HandleSaveBtn;
+  editMode?: EditMode;
 }
 
 export interface HandleAddBtnProp {
-  handleAddBtn: () => void;
+  handleAddBtn: VoidFunction;
 }
 
 export interface SearchBarPros {
   notefilter: (text: string, color: NoteColor) => void;
+}
+
+export interface TiptapTextEditorProps {
+  setText: (text: string) => void;
+  text: string;
+  theme: NoteColorTheme;
+  handleSaveBtn: HandleSaveBtn;
+  editMode?: EditMode;
 }
 
 // Color System types
@@ -79,4 +92,12 @@ export interface NoteColorTheme {
   text: NoteTextColor;
   bg: NoteBackgroundColor;
   border: NoteBorderColor;
+}
+
+export interface ToolStatusProps {
+  bold: boolean;
+  italic: boolean;
+  underline: boolean;
+  strikethrough: boolean;
+  bulletList: boolean;
 }

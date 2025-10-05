@@ -2,13 +2,7 @@ import { useState } from "react";
 import ColorPalette from "./ColorPalette";
 import useColor from "../hooks/useColor";
 import type { NoteComposerProps } from "../types/note";
-
-import { useEditor, EditorContent } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
-import CharacterCount from "@tiptap/extension-character-count";
-import Placeholder from "@tiptap/extension-placeholder";
-
-import { Bold, Italic, List, Strikethrough, Underline } from "lucide-react";
+import TiptapTextEditor from "./TiptapTextEditor";
 import { htmlToText } from "../utils/text";
 
 const NoteComposer = ({ handleSaveBtn, editMode }: NoteComposerProps) => {
@@ -16,20 +10,6 @@ const NoteComposer = ({ handleSaveBtn, editMode }: NoteComposerProps) => {
   const { theme, changeTheme } = useColor(
     editMode?.note.colorTheme.name || "yellow"
   );
-
-  const editor = useEditor({
-    extensions: [
-      StarterKit,
-      CharacterCount.configure({ limit: 500 }),
-      Placeholder.configure({
-        placeholder: "What's on your mind? (Ctrl+Enter to save)", // shows only when empty
-      }),
-    ],
-    content: editMode?.note.text || "",
-    onUpdate: ({ editor }) => {
-      setText(editor.getHTML());
-    },
-  });
 
   return (
     <div
@@ -39,58 +19,13 @@ const NoteComposer = ({ handleSaveBtn, editMode }: NoteComposerProps) => {
         {editMode?.note ? "Edit Note" : "New Note"}
       </span>
 
-      {/* text Area */}
-      <div className="flex flex-col bg-white/70 min-h-[100px] rounded-md border border-gray-400">
-        <EditorContent
-          editor={editor}
-          onKeyDown={(e) => {
-            if (e.ctrlKey && e.key === "Enter")
-              handleSaveBtn(text, theme, editMode?.note.id);
-          }}
-          onClick={() => editor?.chain().focus().run()}
-          tabIndex={-1}
-          className="flex-1 cursor-text p-2"
-        />
-
-        {/* Toolbar */}
-        <div className="flex gap-2.5  pl-1.5 pt-0.5 mb-1 text-black/75 border-t-1 border-black/40">
-          <Bold
-            className={`w-4 cursor-pointer 
-              ${editor.isActive("bold") ? theme.text : ""}
-            `}
-            strokeWidth={3}
-            onClick={() => editor.chain().focus().toggleBold().run()}
-          />
-          <Italic
-            className={`w-4 cursor-pointer 
-              ${editor.isActive("italic") ? theme.text : ""}
-            `}
-            strokeWidth={3}
-            onClick={() => editor.chain().focus().toggleItalic().run()}
-          />
-          <Underline
-            className={`w-4 cursor-pointer 
-              ${editor.isActive("underline") ? theme.text : ""}
-            `}
-            strokeWidth={3}
-            onClick={() => editor.chain().focus().toggleUnderline().run()}
-          />
-          <Strikethrough
-            className={`w-4 cursor-pointer 
-              ${editor.isActive("strike") ? theme.text : ""}
-            `}
-            strokeWidth={3}
-            onClick={() => editor.chain().focus().toggleStrike().run()}
-          />
-          <List
-            className={`w-4 cursor-pointer 
-              ${editor.isActive("bulletList") ? theme.text : ""}
-            `}
-            strokeWidth={3}
-            onClick={() => editor.chain().focus().toggleBulletList().run()}
-          />
-        </div>
-      </div>
+      <TiptapTextEditor
+        setText={setText}
+        text={text}
+        theme={theme}
+        handleSaveBtn={handleSaveBtn}
+        editMode={editMode}
+      />
 
       <p className="text-xs text-gray-500 pt-2">
         {htmlToText(text).length}/500 characters
@@ -112,7 +47,7 @@ const NoteComposer = ({ handleSaveBtn, editMode }: NoteComposerProps) => {
             <button
               className="note-btn w-30"
               onClick={() => {
-                handleSaveBtn(editor.getHTML(), theme, editMode.note.id);
+                handleSaveBtn(text, theme, editMode.note.id);
               }}
             >
               Save
@@ -130,7 +65,7 @@ const NoteComposer = ({ handleSaveBtn, editMode }: NoteComposerProps) => {
         <button
           className="note-btn mt-2"
           onClick={() => {
-            handleSaveBtn(editor.getHTML(), theme);
+            handleSaveBtn(text, theme);
           }}
         >
           Save Note
