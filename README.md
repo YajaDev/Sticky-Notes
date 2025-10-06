@@ -10,13 +10,15 @@ You can **create, edit, delete, pin, and search notes** — with support for fil
 ## Features
 
 - ➕ **Add Notes** – Create new sticky notes with custom colors.
-- ✏️ **Edit Notes** – Update existing notes inline.
+- ✏️ **Rich Text Editor** – Bold, italic, underline, strikethrough, and bullet lists powered by Tiptap
 - 🗑 **Delete Notes** – Remove notes permanently.
 - 📌 **Pin Notes** – Keep important notes on top.
 - 🔍 **Search & Filter** – Search by text or filter notes by color.
 - 🎨 **Color Themes** – Choose from multiple note colors.
-- 💾 **Local Storage** – Notes are saved automatically in the browser.
+- 💾 **Persistent Storage** – Auto-save to localStorage
 - ⌨️ **Keyboard Shortcut** – Save note with `Ctrl + Enter`.
+- 📱 **Responsive Design** – Works on mobile, tablet, and desktop
+- ♿ **Accessible** – ARIA labels and keyboard navigation support
 
 ## Tech Stack
 
@@ -25,6 +27,8 @@ You can **create, edit, delete, pin, and search notes** — with support for fil
 - **Lucide React** – Icons (`Plus`, `Pin`, `Trash`, etc.)
 - **Day.js** – Formatting date & time
 - **LocalStorage** – Persistent storage
+- **TypeScript** – Type safety and better DX
+- **Tiptap** – Rich text editor framework
 
 ## Development Reflection
 
@@ -34,12 +38,15 @@ You can **create, edit, delete, pin, and search notes** — with support for fil
 - The unified NoteComposer component for both create/edit modes worked elegantly
 - Custom hooks (useNote, useFilteredNote) kept the code organized
 - Tailwind CSS made responsive styling quick
+- Tiptap's extensible architecture made implementing rich text features straightforward.
 
 ### Challenges
 
 - Managing filter state persistence when adding new notes required rethinking the data flow
 - Coordinating search and filter state across components needed careful prop drilling
 - Ensuring pinned notes stayed at the top while maintaining sort order
+- Created a custom useToolStatus hook to track active formatting (bold, italic, etc.) by subscribing to Tiptap's transaction events. 
+  This separated concerns and kept the editor component clean.
 
 ### Technical Decisions
 
@@ -48,14 +55,16 @@ You can **create, edit, delete, pin, and search notes** — with support for fil
 - **Vite**: Faster than CRA for development and builds
 - **Tailwind CSS**: Utility-first CSS without configuration overhead
 - **Day.js**: Lightweight alternative to Moment.js for date formatting
+- **useMemo for Filtering**: Prevents unnecessary recalculation of filtered notes on every render
+- **Tiptap over Draft.js**: More modern, better TypeScript support, smaller bundle
 
 ### What I'd Refactor First
 
 1. Fix the typo: `toglePin` should be `togglePin` throughout the codebase
 2. Improve accessibility: Add comprehensive aria-label attributes (partially done)
 3. Fix the filter persistence bug in useFilteredNote
-4. Better ID generation: `Date.now() * Math.random()` could cause collisions - use UUID
-5. Extract localStorage logic: Create a utility module for storage operations
+4. Extract localStorage logic: Create a utility module for storage operations
+5. Add text formating using Tiptap library
 
 ### Next Refactoring Priorities
 
@@ -63,6 +72,7 @@ You can **create, edit, delete, pin, and search notes** — with support for fil
 2. Implement proper error boundaries
 3. Add debounce to search input for better performance
 4. Improve accessibility with ARIA labels and focus management
+5. Better ID generation: `Date.now() * Math.random()` could cause collisions - use UUID
 
 ## Installation
 
