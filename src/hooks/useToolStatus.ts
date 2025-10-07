@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Editor } from "@tiptap/react";
 import type { ToolStatusProps } from "../types/note";
 
@@ -15,15 +15,14 @@ const useToolStatus = (editor: Editor | null) => {
     if (!editor) return;
 
     const updateStatus = () => {
-
-    setStatus({
-      bold: editor.isActive("bold"),
-      italic: editor.isActive("italic"),
-      underline: editor.isActive("underline"),
-      strikethrough: editor.isActive("strike"),
-      bulletList: editor.isActive("bulletList"),
-    });
-  };
+      setStatus({
+        bold: editor.isActive("bold"),
+        italic: editor.isActive("italic"),
+        underline: editor.isActive("underline"),
+        strikethrough: editor.isActive("strike"),
+        bulletList: editor.isActive("bulletList"),
+      });
+    };
 
     updateStatus(); // initialize once
 
